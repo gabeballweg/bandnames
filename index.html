@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Names for your Band or Fantasy Team</title>
+<meta charset="utf-8">
+<style>
+body{font-family:sans-serif;max-width:600px;margin:40px auto;padding:0 20px}
+h1{font-size:1.5em}
+</style>
+</head>
+<body>
+<h1>Names for your Band or Fantasy Team</h1>
+<ul id="list"></ul>
+<script>
+// Paste your published-to-web Google Sheet CSV link below
+const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQxpUoBd3nql6fz7rlwpoFPSp8ahxEO7pLadL-5b5fxbaVpiCTzRg6SwnNCksHeVA8SSCFGSttQ_O8m/pub?gid=0&single=true&output=csv";
+
+fetch(SHEET_CSV_URL)
+  .then(r => {
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    return r.text();
+  })
+  .then(text => {
+    const items = text.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+    for (let i = items.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [items[i], items[j]] = [items[j], items[i]];
+    }
+    document.getElementById("list").innerHTML = items.map(i => `<li>${i}</li>`).join("");
+  })
+  .catch(err => {
+    document.getElementById("list").innerHTML = "<li>Could not load list: " + err.message + "</li>";
+  });
+</script>
+</body>
+</html>
