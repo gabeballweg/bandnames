@@ -4,9 +4,9 @@
 <title>GREAT NAMES</title>
 <meta charset="utf-8">
 <style>
-  body{font-family:monospace;width:70%;margin:40px auto;padding:0 20px;background:#0b0b0b}
-  h1{font-size:1.5em;color:#fff;padding-bottom:20px;text-align: center;}
-  p{color:#fff}
+  body{font-family:monospace;width:70%;margin:40px auto;padding:0 20px;background:#FFD000}
+  h1{font-size:1.5em;color:#000000;padding-bottom:20px;text-align: center;}
+  p{color:#000000}
   #toggle{text-align:center;padding-bottom:20px}
   #toggle button{background:#222;color:#fff;border:1px solid #555;padding:6px 14px;font-family:monospace;cursor:pointer}
   #toggle button.active{background:#fff;color:#0b0b0b}
@@ -16,14 +16,11 @@
     padding:8px 12px;
     border-radius:4px
   }
-  li:nth-child(7n+1){background:#8C1818}
-  li:nth-child(7n+2){background:#188c5e}
-  li:nth-child(7n+3){background:#ab5e1b}
-  li:nth-child(7n+4){background:#CF8B17}
-  li:nth-child(7n+5){background:#9E1B77}
-  li:nth-child(7n+6){background:#54188C}
-  li:nth-child(7n+7){background:#185a8c}
-  #randomizer{display:none;text-align:center;background-color: #242424;border:1px solid #555;padding-bottom:20px;}
+  li:nth-child(4n+1){background:#193A5C}
+  li:nth-child(4n+2){background:#0EAE7B}
+  li:nth-child(4n+3){background:#206DBF}
+  li:nth-child(4n+4){background:#96347B}
+  #randomizer{display:none;text-align:center;background-color: #242424;border:1px solid #555;}
   #randomItem{color:#fff;font-size:4em;padding:80px}
   #randomizer button{background:#222;color:#fff;border:1px solid #555;padding:8px 18px;font-family:monospace;cursor:pointer}
 </style>
@@ -39,7 +36,6 @@
 <div id="randomizer">
   <div id="randomItem"></div>
   <button onclick="showRandom()">Another!</button>
-  <p>(or press space)</p>
 </div>
 <script>
 // Paste your published-to-web Google Sheet CSV link below
