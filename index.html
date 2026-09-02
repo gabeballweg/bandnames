@@ -12,14 +12,12 @@
   #toggle button.active{background:#fff;color:#0b0b0b}
   ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
   li {
-    color:#fff;
+    background-color: #fff;
+    color:#000;
     padding:8px 12px;
     border-radius:4px
+    border: 1px solid #000;
   }
-  li:nth-child(4n+1){background:#193A5C}
-  li:nth-child(4n+2){background:#0EAE7B}
-  li:nth-child(4n+3){background:#206DBF}
-  li:nth-child(4n+4){background:#96347B}
   #randomizer{display:none;text-align:center;background-color: #242424;border:1px solid #555;}
   #randomItem{color:#fff;font-size:4em;padding:80px}
   #randomizer button{background:#222;color:#fff;border:1px solid #555;padding:8px 18px;font-family:monospace;cursor:pointer}
@@ -36,6 +34,7 @@
 <div id="randomizer">
   <div id="randomItem"></div>
   <button onclick="showRandom()">Another!</button>
+  <p>(or press space)</p>
 </div>
 <script>
 // Paste your published-to-web Google Sheet CSV link below
