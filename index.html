@@ -24,7 +24,7 @@
   li:nth-child(7n+6){background:#54188C}
   li:nth-child(7n+7){background:#185a8c}
   #randomizer{display:none;text-align:center}
-  #randomItem{color:#fff;font-size:2em;padding:20px}
+  #randomItem{color:#fff;font-size:8em;padding:100px}
   #randomizer button{background:#222;color:#fff;border:1px solid #555;padding:8px 18px;font-family:monospace;cursor:pointer}
 </style>
 </head>
@@ -32,13 +32,13 @@
 <h1>Names for your Band, Craft Beer, Racehorse, or Fantasy Football Team</h1>
 <p>Observed, stolen, and imagined phrases that have the specific <i>je ne sais quoi</i> of a great name. Use em, tweak em, steal em, laugh at em. 100% human creativity - no AI used, ever.</p>
 <div id="toggle">
-  <button id="listBtn" class="active" onclick="showView('list')">List</button>
+  <button id="listBtn" class="active" onclick="showView('list')">List View</button>
   <button id="randBtn" onclick="showView('random')">Randomizer</button>
 </div>
 <ul id="list"></ul>
 <div id="randomizer">
   <div id="randomItem"></div>
-  <button onclick="showRandom()">Refresh (or press space)</button>
+  <button onclick="showRandom()">Another!</button>
 </div>
 <script>
 // Paste your published-to-web Google Sheet CSV link below
