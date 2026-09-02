@@ -6,6 +6,10 @@
 <style>
   body{font-family:monospace;width:70%;margin:40px auto;padding:0 20px;background:#0b0b0b}
   h1{font-size:1.5em;color:#fff;padding-bottom:20px;text-align: center;}
+  p{color:#fff}
+  #toggle{text-align:center;padding-bottom:20px}
+  #toggle button{background:#222;color:#fff;border:1px solid #555;padding:6px 14px;font-family:monospace;cursor:pointer}
+  #toggle button.active{background:#fff;color:#0b0b0b}
   ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
   li {
     color:#fff;
@@ -19,16 +23,29 @@
   li:nth-child(7n+5){background:#9E1B77}
   li:nth-child(7n+6){background:#54188C}
   li:nth-child(7n+7){background:#185a8c}
+  #randomizer{display:none;text-align:center}
+  #randomItem{color:#fff;font-size:2em;padding:20px}
+  #randomizer button{background:#222;color:#fff;border:1px solid #555;padding:8px 18px;font-family:monospace;cursor:pointer}
 </style>
-
 </head>
 <body>
 <h1>Names for your Band, Craft Beer, Racehorse, or Fantasy Football Team</h1>
-<p>Observed or imagined phrases that have the specific <i>je ne sais quoi</i> of a great name. Use em, tweak em, steal em, laugh at em. 100% human creativity - no AI used, ever.</p>
+<p>Observed, stolen, and imagined phrases that have the specific <i>je ne sais quoi</i> of a great name. Use em, tweak em, steal em, laugh at em. 100% human creativity - no AI used, ever.</p>
+<div id="toggle">
+  <button id="listBtn" class="active" onclick="showView('list')">List</button>
+  <button id="randBtn" onclick="showView('random')">Randomizer</button>
+</div>
 <ul id="list"></ul>
+<div id="randomizer">
+  <div id="randomItem"></div>
+  <button onclick="showRandom()">Refresh (or press space)</button>
+</div>
 <script>
 // Paste your published-to-web Google Sheet CSV link below
 const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQxpUoBd3nql6fz7rlwpoFPSp8ahxEO7pLadL-5b5fxbaVpiCTzRg6SwnNCksHeVA8SSCFGSttQ_O8m/pub?gid=0&single=true&output=csv";
+
+let items = [];
+let currentView = "list";
 
 fetch(SHEET_CSV_URL)
   .then(r => {
@@ -36,16 +53,38 @@ fetch(SHEET_CSV_URL)
     return r.text();
   })
   .then(text => {
-    const items = text.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+    items = text.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
     for (let i = items.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [items[i], items[j]] = [items[j], items[i]];
     }
     document.getElementById("list").innerHTML = items.map(i => `<li>${i}</li>`).join("");
+    showRandom();
   })
   .catch(err => {
     document.getElementById("list").innerHTML = "<li>Could not load list: " + err.message + "</li>";
   });
+
+function showView(view) {
+  currentView = view;
+  document.getElementById("list").style.display = view === "list" ? "flex" : "none";
+  document.getElementById("randomizer").style.display = view === "random" ? "block" : "none";
+  document.getElementById("listBtn").classList.toggle("active", view === "list");
+  document.getElementById("randBtn").classList.toggle("active", view === "random");
+}
+
+function showRandom() {
+  if (!items.length) return;
+  const idx = Math.floor(Math.random() * items.length);
+  document.getElementById("randomItem").textContent = items[idx];
+}
+
+document.addEventListener("keydown", e => {
+  if (e.code === "Space" && currentView === "random") {
+    e.preventDefault();
+    showRandom();
+  }
+});
 </script>
 </body>
 </html>
