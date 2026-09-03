@@ -3,6 +3,7 @@
 <head>
 <title>BandHorseBeerTeam</title>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
   body{font-family:monospace;width:70%;margin:40px auto;padding:0 20px;background:#FFD000}
   h1{font-size:1.5em;color:#000000;padding-bottom:20px;text-align: center;}
@@ -20,6 +21,16 @@
   #randomizer{display:none;padding:10px;background-color:#FFF5CB;text-align:center;border:1px solid #000000;}
   #randomItem{color:#000000;font-size:4em;padding:80px}
   #randomizer button{background:#000000;color:#fff;border:none;padding:8px 18px;font-family:monospace;cursor:pointer}
+
+  @media (max-width:600px){
+    body{width:auto;margin:20px auto;padding:0 15px}
+    h1{font-size:1.2em}
+    p{font-size:0.9em}
+    #toggle button{padding:8px 12px;font-size:0.9em}
+    li{padding:6px 10px;font-size:0.9em}
+    #randomizer{padding:10px 5px}
+    #randomItem{font-size:1.8em;padding:40px 10px}
+  }
 </style>
 </head>
 <body>
@@ -38,10 +49,8 @@
 <script>
 // Paste your published-to-web Google Sheet CSV link below
 const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQxpUoBd3nql6fz7rlwpoFPSp8ahxEO7pLadL-5b5fxbaVpiCTzRg6SwnNCksHeVA8SSCFGSttQ_O8m/pub?gid=0&single=true&output=csv";
-
 let items = [];
 let currentView = "list";
-
 fetch(SHEET_CSV_URL)
   .then(r => {
     if (!r.ok) throw new Error("HTTP " + r.status);
@@ -59,7 +68,6 @@ fetch(SHEET_CSV_URL)
   .catch(err => {
     document.getElementById("list").innerHTML = "<li>Could not load list: " + err.message + "</li>";
   });
-
 function showView(view) {
   currentView = view;
   document.getElementById("list").style.display = view === "list" ? "flex" : "none";
@@ -67,13 +75,11 @@ function showView(view) {
   document.getElementById("listBtn").classList.toggle("active", view === "list");
   document.getElementById("randBtn").classList.toggle("active", view === "random");
 }
-
 function showRandom() {
   if (!items.length) return;
   const idx = Math.floor(Math.random() * items.length);
   document.getElementById("randomItem").textContent = items[idx];
 }
-
 document.addEventListener("keydown", e => {
   if (e.code === "Space" && currentView === "random") {
     e.preventDefault();
