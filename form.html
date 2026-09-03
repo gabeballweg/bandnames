@@ -3,6 +3,7 @@
 <head>
 <title>Submit a Name</title>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
   *{box-sizing:border-box}
   body{font-family:monospace;width:70%;margin:40px auto;padding:0 20px;background:#FFD000}
@@ -11,6 +12,12 @@
   input:focus{outline:none;border:1px solid #000;box-shadow:0 0 0 2px #FFD000}
   button{font-family:monospace;background:#000;color:#fff;border:none;padding:8px 18px;cursor:pointer;width:70%;display:block;margin:0 auto;margin-top:10px;}
   #status{color:#000000;text-align:center;}
+
+  @media (max-width:600px){
+    body{width:auto;margin:20px auto;padding:0 15px}
+    h1{font-size:1.2em}
+    input,button{width:100%}
+  }
 </style>
 </head>
 <body>
@@ -20,13 +27,11 @@
   <p id="status"></p>
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby3CwMGiKimvCkkvFTmktH5HwA0qlK8lqWwlV5UTMrqh4yRDP3KR9twG3p0ThkW1Lbh/exec";
-
 function submitEntry() {
   const input = document.getElementById("entry");
   const status = document.getElementById("status");
   const value = input.value.trim();
   if (!value) return;
-
   fetch(SCRIPT_URL, {
     method: "POST",
     mode: "no-cors",
